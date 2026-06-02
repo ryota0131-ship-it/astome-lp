@@ -3,551 +3,393 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASTOme — 明日の自分へ</title>
-<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;700;900&family=Noto+Sans+JP:wght@200;300;400&family=Outfit:wght@300;400&display=swap" rel="stylesheet">
+<title>ASTOme — 明日のための楽しみを、一緒に探そう</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Noto+Sans+JP:wght@300;400&family=Epilogue:wght@700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green-deep: #1a2a1e;
-    --green-mist: #2d4a35;
-    --green-light: #8db89a;
-    --green-pale: #c4e8cc;
-    --cream: #f5f2ec;
-    --cream-dark: #e8e4dd;
-    --text-light: #f0f5f1;
-    --text-muted: rgba(240,245,241,0.5);
-  }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
+  :root {
+    --green: #2a4a38;
+    --green2: #3d6e52;
+    --moss: #6a9a80;
+    --gold: #F3C25B;
+    --bg: #f5f3ee;
+    --bg2: #eef2ee;
+    --ink: #1e2820;
+    --mid: #4a5a50;
+  }
+
   body {
-    background: var(--green-deep);
-    color: var(--text-light);
+    background: var(--bg);
+    color: var(--ink);
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 300;
-    overflow-x: hidden;
-  }
-
-  /* ========== NAV ========== */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 24px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(to bottom, rgba(26,42,30,0.9), transparent);
-  }
-
-  .nav-logo {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--text-light);
-  }
-  .nav-logo span { font-size: 16px; opacity: 0.6; font-weight: 400; }
-
-  .nav-cta {
-    padding: 10px 24px;
-    border: 1px solid rgba(168,212,180,0.4);
-    border-radius: 100px;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    color: var(--green-pale);
-    text-decoration: none;
-    font-family: 'Outfit', sans-serif;
-    transition: all 0.3s;
-  }
-  .nav-cta:hover {
-    background: rgba(168,212,180,0.1);
-    border-color: var(--green-pale);
-  }
-
-  /* ========== HERO ========== */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 120px 48px 80px;
-    position: relative;
-    overflow: hidden;
   }
 
   .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('./kushiroFV.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.35) saturate(0.8);
+    background: linear-gradient(160deg, #C6D3C3 0%, #F4EEDC 50%, #e8e4d4 100%);
+    z-index: 0;
   }
 
-  .hero-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 100% 60% at 50% 100%, rgba(26,42,30,1) 0%, transparent 70%),
-      linear-gradient(to bottom, rgba(26,42,30,0.3) 0%, transparent 40%);
+  .hero { position: relative; z-index: 1; color: var(--ink); }
+  .hero .hero-label { color: var(--forest); }
+  .hero .hero-title em { color: var(--forest); }
+  .hero .hero-body { color: var(--mid); }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(247,244,239,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(42,74,56,0.1);
   }
 
-  /* 霧のアニメーション */
-  .fog {
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='800' height='400' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    opacity: 0.4;
-    pointer-events: none;
-  }
-
-  .hero-content { position: relative; z-index: 1; }
-
-  .hero-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    color: var(--green-light);
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.2s;
-  }
-
-  .hero-logo {
+  .logo {
     font-family: 'Epilogue', sans-serif;
-    font-size: clamp(72px, 12vw, 140px);
+    font-size: 18px;
     font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    color: var(--text-light);
-    margin-bottom: 8px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.4s;
+    letter-spacing: -0.02em;
+    color: var(--green);
   }
-  .hero-logo span { font-size: 0.65em; opacity: 0.55; font-weight: 400; }
 
-  .hero-katakana {
-    font-size: 14px;
-    letter-spacing: 0.5em;
-    color: var(--text-muted);
+  .nav-btn {
+    padding: 10px 24px;
+    background: var(--green);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 2px;
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: background 0.2s;
+  }
+  .nav-btn:hover { background: var(--green2); box-shadow: 0 4px 12px rgba(45,74,53,0.2); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 80px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-label {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--forest);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: up 0.8s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 8vw, 88px);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: up 0.8s ease forwards 0.4s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  .hero-body {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--mid);
     margin-bottom: 48px;
+    max-width: 480px;
     opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.5s;
-  }
-
-  .hero-tagline {
-    font-size: clamp(18px, 3vw, 28px);
-    font-weight: 200;
-    line-height: 1.8;
-    color: var(--text-light);
-    max-width: 560px;
-    margin: 0 auto 64px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.6s;
+    animation: up 0.8s ease forwards 0.6s;
   }
 
   .hero-cta {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 18px 40px;
-    background: var(--green-mist);
-    border: 1px solid rgba(168,212,180,0.3);
-    border-radius: 100px;
-    color: var(--text-light);
+    gap: 10px;
+    padding: 16px 36px;
+    background: var(--green);
+    color: #fff;
     text-decoration: none;
-    font-family: 'Outfit', sans-serif;
     font-size: 14px;
-    letter-spacing: 0.1em;
-    transition: all 0.3s;
+    border-radius: 2px;
+    transition: all 0.2s;
     opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.8s;
+    animation: up 0.8s ease forwards 0.8s;
+    align-self: flex-start;
   }
-  .hero-cta:hover {
-    background: rgba(45,74,53,0.8);
-    border-color: var(--green-pale);
-    transform: translateY(-2px);
-  }
-  .hero-cta-arrow { font-size: 18px; transition: transform 0.3s; }
-  .hero-cta:hover .hero-cta-arrow { transform: translateX(4px); }
+  .hero-cta:hover { background: var(--green2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,74,56,0.2); }
 
-  /* scroll indicator */
-  .scroll-hint {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 1.2s;
-  }
-  .scroll-hint-text {
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-  }
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--green-light), transparent);
-    animation: scrollLine 2s ease-in-out infinite;
-  }
-  @keyframes scrollLine {
-    0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
-    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
-    100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
-  }
-
-  /* ========== PROBLEM ========== */
-  .problem {
-    padding: 120px 48px;
-    max-width: 900px;
+  /* SECTIONS */
+  .section {
+    padding: 100px 80px;
+    max-width: 1100px;
     margin: 0 auto;
-    text-align: center;
   }
 
-  .section-label {
+  .section-dark {
+    background: #eef4f0;
+    max-width: 100%;
+    padding: 100px 40px;
+  }
+
+  .section-dark-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  .label {
+    font-family: 'Epilogue', sans-serif;
     font-size: 10px;
-    letter-spacing: 0.4em;
-    color: var(--green-light);
+    letter-spacing: 0.35em;
+    color: var(--forest);
     text-transform: uppercase;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
     display: block;
   }
 
-  .problem-lead {
-    font-size: clamp(24px, 4vw, 42px);
-    font-weight: 200;
-    line-height: 1.9;
-    color: var(--text-light);
-    margin-bottom: 60px;
-  }
-  .problem-lead strong {
-    font-weight: 400;
-    color: var(--green-pale);
+  .big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.4;
+    margin-bottom: 48px;
   }
 
-  .problem-cards {
+  .big em { font-style: italic; color: var(--green); }
+  .big-light { color: #1c2a22; }
+  .big-light em { color: var(--green); }
+
+  .body {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--mid);
+  }
+
+  .body-light {
+    font-size: 15px;
+    line-height: 2;
+    color: #3a5244;
+  }
+
+  /* CARDS */
+  .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 60px;
+    gap: 2px;
+    margin-top: 48px;
   }
 
-  .problem-card {
-    background: rgba(45,74,53,0.3);
-    border: 1px solid rgba(141,184,154,0.15);
-    border-radius: 12px;
+  .card {
+    background: #ede8d8;
     padding: 32px 24px;
-    text-align: left;
   }
 
-  .problem-card-num {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--green-light);
-    opacity: 0.6;
+  .card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--forest);
     margin-bottom: 16px;
+    line-height: 1;
   }
 
-  .problem-card-text {
-    font-size: 15px;
+  .card-text {
+    font-size: 14px;
     line-height: 1.8;
-    color: var(--text-light);
+    color: #3a3530;
+  }
+
+  /* DARK CARDS */
+  .dark-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .dark-card {
+    background: #fff;
+    border: 1px solid rgba(42,74,56,0.1);
+    padding: 36px 28px;
+  }
+
+  .dark-card-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: #1c2a22;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .dark-card-body {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #3a5244;
+  }
+
+  .dark-card-source {
+    margin-top: 16px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #F3C25B;
     opacity: 0.8;
   }
 
-  /* ========== WHAT ========== */
-  .what {
-    padding: 120px 48px;
-    background: rgba(45,74,53,0.2);
-    position: relative;
-  }
-
-  .what-inner {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .what-text {}
-
-  .what-title {
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 200;
-    line-height: 1.7;
-    margin-bottom: 32px;
-  }
-  .what-title strong { font-weight: 400; color: var(--green-pale); }
-
-  .what-body {
-    font-size: 15px;
-    line-height: 2;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-  }
-
-  .what-science {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 20px 24px;
-    background: rgba(141,184,154,0.08);
-    border-left: 2px solid var(--green-light);
-    border-radius: 0 8px 8px 0;
-  }
-  .what-science-icon { font-size: 20px; margin-top: 2px; }
-  .what-science-text { font-size: 13px; line-height: 1.8; color: var(--text-muted); }
-  .what-science-text strong { color: var(--green-pale); font-weight: 400; }
-
-  .what-visual {
-    position: relative;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .breath-circle {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(141,184,154,0.2);
-    animation: breathe 4s ease-in-out infinite;
-  }
-  .bc1 { width: 200px; height: 200px; animation-delay: 0s; }
-  .bc2 { width: 280px; height: 280px; animation-delay: 0.3s; opacity: 0.6; }
-  .bc3 { width: 360px; height: 360px; animation-delay: 0.6s; opacity: 0.3; }
-
-  @keyframes breathe {
-    0%, 100% { transform: scale(1); opacity: 0.2; }
-    50% { transform: scale(1.1); opacity: 0.5; }
-  }
-
-  .breath-center {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-  }
-  .breath-center-text {
-    font-size: 13px;
-    letter-spacing: 0.3em;
-    color: var(--green-light);
-    text-transform: uppercase;
-  }
-  .breath-center-jp {
-    font-size: 22px;
-    font-weight: 200;
-    color: var(--text-light);
-    margin-top: 8px;
-  }
-
-  /* ========== HOW ========== */
-  .how {
-    padding: 120px 48px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .how-title {
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 200;
-    text-align: center;
-    margin-bottom: 80px;
-    line-height: 1.7;
-  }
-  .how-title strong { font-weight: 400; color: var(--green-pale); }
-
+  /* STEPS */
   .steps {
     display: flex;
     flex-direction: column;
     gap: 0;
+    margin-top: 48px;
   }
 
   .step {
-    display: grid;
-    grid-template-columns: 80px 1fr;
+    display: flex;
     gap: 32px;
     align-items: flex-start;
-    padding: 40px 0;
-    border-bottom: 1px solid rgba(141,184,154,0.1);
-    position: relative;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
   }
   .step:last-child { border-bottom: none; }
 
   .step-num {
-    font-family: 'Epilogue', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 48px;
-    font-weight: 900;
-    color: rgba(141,184,154,0.15);
+    font-weight: 300;
+    color: rgba(45,74,53,0.2);
     line-height: 1;
-    padding-top: 4px;
+    min-width: 48px;
   }
 
-  .step-content {}
-  .step-tag {
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: var(--green-light);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
   .step-title {
-    font-size: 22px;
-    font-weight: 300;
-    color: var(--text-light);
-    margin-bottom: 12px;
-    line-height: 1.5;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
   }
+
   .step-body {
     font-size: 14px;
-    line-height: 1.9;
-    color: var(--text-muted);
+    line-height: 1.8;
+    color: var(--mid);
   }
 
-  /* ========== SEASON ========== */
-  .season {
-    padding: 120px 48px;
-    background: var(--cream);
-    color: #1a2a1e;
+  /* WHO5 */
+  .who5-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 40px;
   }
 
-  .season-inner {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .season-label {
-    font-size: 10px;
-    letter-spacing: 0.4em;
-    color: #4a8a5e;
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    display: block;
-  }
-
-  .season-title {
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 200;
-    color: #1a2a1e;
-    margin-bottom: 60px;
-    line-height: 1.7;
-  }
-
-  .season-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .who5-item {
+    display: flex;
+    align-items: center;
     gap: 20px;
+    padding: 18px 20px;
+    background: #ede8d8;
   }
 
-  .season-card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #e0ede3;
-  }
-
-  .season-card-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    filter: brightness(0.85) saturate(0.9);
-  }
-
-  .season-card-body-wrap {
-    padding: 32px;
-  }
-
-  .season-card-season {
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: #4a8a5e;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-
-  .season-card-title {
+  .who5-num {
+    font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
-    font-weight: 300;
-    color: #1a2a1e;
-    margin-bottom: 16px;
+    color: var(--forest);
+    min-width: 20px;
   }
 
-  .season-card-body {
-    font-size: 14px;
-    line-height: 1.9;
-    color: #5a7a62;
-  }
+  .who5-text { font-size: 14px; color: #3a3530; }
+  .who5-text-hl { font-size: 14px; color: var(--gold); font-weight: 400; }
 
-  /* ========== CTA ========== */
-  .cta-section {
-    padding: 160px 48px;
+  /* PROMISE */
+  .promise {
+    background: #eef4f0;
+    padding: 120px 40px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
   }
 
-  .cta-bg {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(45,74,53,0.6) 0%, transparent 70%);
+  .promise-inner { max-width: 600px; margin: 0 auto; }
+
+  .promise-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 300;
+    line-height: 1.4;
+    color: #1e2e24;
+    margin-bottom: 32px;
   }
 
-  .cta-content { position: relative; z-index: 1; }
+  .promise-body {
+    font-size: 15px;
+    line-height: 2;
+    color: #3a5244;
+  }
+
+  /* CTA */
+  .cta {
+    padding: 120px 40px;
+    text-align: center;
+    background: #ede8d8;
+  }
+
+  .cta-inner { max-width: 500px; margin: 0 auto; }
 
   .cta-title {
-    font-size: clamp(28px, 5vw, 56px);
-    font-weight: 200;
-    line-height: 1.6;
-    margin-bottom: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 20px;
   }
-  .cta-title strong { font-weight: 400; color: var(--green-pale); }
 
   .cta-sub {
-    font-size: 15px;
-    color: var(--text-muted);
-    margin-bottom: 48px;
-    line-height: 1.8;
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 2;
+    margin-bottom: 40px;
   }
 
   .cta-btn {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 20px 48px;
-    background: var(--green-mist);
-    border: 1px solid rgba(168,212,180,0.4);
-    border-radius: 100px;
-    color: var(--text-light);
+    gap: 10px;
+    padding: 16px 40px;
+    background: var(--green);
+    color: #fff;
     text-decoration: none;
-    font-family: 'Outfit', sans-serif;
-    font-size: 15px;
-    letter-spacing: 0.1em;
-    transition: all 0.3s;
+    font-size: 14px;
+    border-radius: 2px;
+    transition: all 0.2s;
   }
-  .cta-btn:hover {
-    background: rgba(45,74,53,0.9);
-    border-color: var(--green-pale);
-    transform: translateY(-3px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  }
+  .cta-btn:hover { background: var(--green2); transform: translateY(-2px); }
 
-  /* ========== FOOTER ========== */
+  .cta-note { margin-top: 16px; font-size: 12px; color: var(--mid); }
+
+  /* FOOTER */
   footer {
-    padding: 48px;
-    border-top: 1px solid rgba(141,184,154,0.1);
+    padding: 32px 40px;
+    border-top: 1px solid rgba(0,0,0,0.07);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -555,256 +397,239 @@
 
   .footer-logo {
     font-family: 'Epilogue', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-  .footer-logo span { font-size: 13px; opacity: 0.5; font-weight: 400; }
-
-  .footer-copy {
-    font-size: 12px;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
+    color: var(--green);
   }
 
-  /* ========== ANIMATIONS ========== */
-  @keyframes fadeUp {
+  .footer-copy { font-size: 12px; color: var(--mid); }
+
+  /* ANIMATION */
+  @keyframes up {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ========== RESPONSIVE ========== */
-  @media (max-width: 768px) {
-    nav { padding: 20px 24px; }
-    .hero { padding: 100px 24px 80px; }
-    .problem { padding: 80px 24px; }
-    .problem-cards { grid-template-columns: 1fr; }
-    .what { padding: 80px 24px; }
-    .what-inner { grid-template-columns: 1fr; gap: 48px; }
-    .what-visual { height: 280px; }
-    .how { padding: 80px 24px; }
-    .season { padding: 80px 24px; }
-    .season-cards { grid-template-columns: 1fr; }
-    .cta-section { padding: 100px 24px; }
-    footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  /* MOBILE */
+  @media (max-width: 680px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 100px 24px 60px; }
+    .section { padding: 72px 24px; }
+    .section-dark { padding: 72px 24px; }
+    .cards { grid-template-columns: 1fr; }
+    .dark-cards { grid-template-columns: 1fr; }
+    .promise { padding: 80px 20px; }
+    .cta { padding: 80px 20px; }
+    footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">ASTO<span>me</span></div>
-  <a href="#cta" class="nav-cta">モニター募集</a>
+  <div class="logo" style="display:flex; align-items:center; gap:10px;">
+  <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
+    <rect width="120" height="120" rx="26" fill="url(#nav-bg)"/>
+    <defs>
+      <radialGradient id="nav-glow" cx="60%" cy="70%" r="50%">
+        <stop offset="0%" stop-color="#f5f0dc" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="nav-bg" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#C6D3C3"/>
+        <stop offset="100%" stop-color="#b8c8b4"/>
+      </linearGradient>
+      <linearGradient id="nav-a" x1="30" y1="15" x2="90" y2="100" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#6a8e7a"/>
+        <stop offset="100%" stop-color="#8ab0a0"/>
+      </linearGradient>
+      <radialGradient id="nav-sun" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#F8DFA3"/>
+        <stop offset="100%" stop-color="#F3C25B"/>
+      </radialGradient>
+    </defs>
+    <rect width="120" height="120" rx="26" fill="url(#nav-glow)"/>
+    <path d="M60 18 L98 88 Q98 95 90 95 L30 95 Q22 95 22 88 Z" fill="none" stroke="url(#nav-a)" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M30 82 Q50 70 60 76 Q70 82 90 74" stroke="rgba(245,240,220,0.9)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="60" cy="74" r="10" fill="url(#nav-sun)"/>
+    <ellipse cx="60" cy="76" rx="18" ry="5" fill="rgba(255,200,80,0.15)"/>
+  </svg>
+  <span>ASTOme</span>
+</div>
+  <a href="#cta" class="nav-btn">先行登録</a>
 </nav>
 
 <!-- HERO -->
+<section style="position:relative; overflow:hidden; background:#1c1a17;">
+<div class="hero-bg"></div>
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="fog"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">釧路発 — ウェルネスリトリート</p>
-    <div class="hero-logo">ASTO<span>me</span></div>
-    <p class="hero-katakana">アストミー</p>
-    <p class="hero-tagline">
-      また明日から頑張ってみようと思える、<br>
-      自分になれる場所。
-    </p>
-    <a href="#how" class="hero-cta">
-      ASTOmeについて知る
-      <span class="hero-cta-arrow">→</span>
-    </a>
-  </div>
-  <div class="scroll-hint">
-    <span class="scroll-hint-text">scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <p class="hero-label">明日の自分のためのサービス</p>
+  <h1 class="hero-title">
+    明日のための<br>
+    <em>楽しみを、</em><br>
+    一緒に探そう
+  </h1>
+  <p class="hero-body">
+    人は未来に楽しみがあると、前向きになれる。<br>
+    でも疲れているとき、何が楽しいかさえわからない。<br>
+    ASTOmeは、その「次の楽しみ」を一緒に見つけます。
+  </p>
+  <a href="#cta" class="hero-cta">先行登録する →</a>
+</section>
 </section>
 
 <!-- PROBLEM -->
-<section class="problem">
-  <span class="section-label">あなたの日常</span>
-  <p class="problem-lead">
-    休日も、寝て終わる。<br>
-    <strong>本当は何かしたいのに、何も始められない。</strong><br><br>
-    このまま何年も、<br>
-    <strong>同じ毎日が続く気がしている。</strong>
-  </p>
-  <div class="problem-cards">
-    <div class="problem-card">
-      <div class="problem-card-num">01</div>
-      <div class="problem-card-text">仕事が終わっても何もできず、気づけば週末も過ぎていく</div>
+<section class="section" style="background:#F4EEDC;">
+  <span class="label">あなたの日常</span>
+  <h2 class="big">休日も、<em>寝て終わる。</em></h2>
+  <p class="body">疲れているのはわかっている。でも何をすれば回復するか、忘れてしまった。</p>
+  
+  <div class="cards" style="margin-top:2px;">
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-text">何が楽しいかもわからない。旅行に行きたいと思っても、調べる気力すら出てこない</div>
     </div>
-    <div class="problem-card">
-      <div class="problem-card-num">02</div>
-      <div class="problem-card-text">疲れているのはわかっている。でも、どうやって回復すればいいかを忘れてしまった</div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-text">仕事だけで一日が終わる。本当は何かしたいのに、何も始められない</div>
     </div>
-    <div class="problem-card">
-      <div class="problem-card-num">03</div>
-      <div class="problem-card-text">旅行に行きたいと思っても、調べる気力すら出てこない</div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT -->
-<section class="what">
-  <div class="what-inner">
-    <div class="what-text">
-      <span class="section-label">ASTOmeとは</span>
-      <h2 class="what-title">
-        <strong>また明日から<br>頑張ってみよう</strong>と<br>思える自分になれる場所。
-      </h2>
-      <p class="what-body">
-        釧路の湿原で、本物の深呼吸をする。霧の中を歩く。カヌーで静寂に漕ぎ出す。その体験が記憶になり、日常に戻ってからも「あの感覚」を呼び起こせるようになる。
-      </p>
-      <div class="what-science">
-        <span class="what-science-icon">🫁</span>
-        <p class="what-science-text">
-          疲れたビジネスパーソンは日常で<strong>浅い呼吸</strong>を続けている。釧路の自然環境は<strong>副交感神経を優位にする</strong>数少ない場所のひとつ。
-        </p>
-      </div>
-    </div>
-    <div class="what-visual">
-      <div class="breath-circle bc3"></div>
-      <div class="breath-circle bc2"></div>
-      <div class="breath-circle bc1"></div>
-      <div class="breath-center">
-        <div class="breath-center-text">deep breath</div>
-        <div class="breath-center-jp">深呼吸</div>
-      </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-text">未来に楽しみが見えない。だから今日も、なんとなく一日が終わっていく</div>
     </div>
   </div>
 </section>
 
 <!-- HOW -->
-<section class="how" id="how">
-  <h2 class="how-title">
-    ASTOmeが届けるのは、<strong>プロセスではなく変化</strong>です。
-  </h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num" style="color:rgba(200,100,100,0.3);">前</div>
-      <div class="step-content">
-        <div class="step-tag" style="color:#c07070;">Before</div>
-        <div class="step-title">休日も寝て終わる。また月曜日が来る。</div>
-        <div class="step-body">疲れているのはわかっている。でも何をすれば回復するかを、もう忘れてしまった。</div>
+<section class="section" style="background:#e8e2d0; max-width:100%; padding: 100px 40px;">
+  <div style="max-width:1100px; margin:0 auto; padding:0 80px;">
+    <span class="label">使い方</span>
+    <h2 class="big">話すだけで、<br><em>次の楽しみ</em>が見えてくる。</h2>
+    
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">今の状態を話してください</div>
+          <div class="step-body">疲れ具合・好きなこと・最近の気分。LINEで自然に話すだけ。</div>
+        </div>
       </div>
-    </div>
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-content">
-        <div class="step-tag">釧路へ</div>
-        <div class="step-title">日本最大の湿原で、カヌーを漕ぐ</div>
-        <div class="step-body">夏でも涼しく、人がいない。東京では絶対に作れない静寂の中で、気づけば深呼吸している。</div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">楽しみを一緒に見つける</div>
+          <div class="step-body">今のあなたに合った楽しみを提案。近い楽しみから、少し先の体験まで。</div>
+        </div>
       </div>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-content">
-        <div class="step-tag">夜と朝</div>
-        <div class="step-title">「自分が何を感じたか」を言葉にする</div>
-        <div class="step-body">夜は今日感じたことを話す。翌朝は霧の湿原を歩く。帰る前に「何を持ち帰るか」を決める。</div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-content">
-        <div class="step-tag">日常へ</div>
-        <div class="step-title">「あの感覚」が、日常の動機になる</div>
-        <div class="step-body">1週間後に釧路の朝の写真が届く。1ヶ月後に「あの日言った言葉」が届く。また前に進みたくなる。</div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num" style="color:rgba(141,184,154,0.5);">後</div>
-      <div class="step-content">
-        <div class="step-tag" style="color:var(--green-pale);">After</div>
-        <div class="step-title">また明日から頑張ってみようと思える自分になる</div>
-        <div class="step-body">旅行の思い出で終わらない。釧路での体験が「再起動のきっかけ」になる。</div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">明日への希望が生まれる</div>
+          <div class="step-body">楽しみが見えた瞬間、また明日から動ける自分になれる。</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHY KUSHIRO -->
-<section class="problem" id="why" style="padding-top:0;">
-  <span class="section-label">なぜ釧路なのか</span>
-  <p class="problem-lead" style="font-size:clamp(18px,2.5vw,28px);">
-    東京には存在しない、<br>
-    <strong>本物の静けさがある。</strong>
-  </p>
-  <div class="problem-cards">
-    <div class="problem-card">
-      <div class="problem-card-num">🌿</div>
-      <div class="problem-card-text">日本最大の湿原。整備されていない本物の荒野が、都会では作れない感覚を呼び起こす</div>
-    </div>
-    <div class="problem-card">
-      <div class="problem-card-num">🌡️</div>
-      <div class="problem-card-text">夏でも平均20℃前後。東京の夏に疲れた体が、ここで初めて深呼吸できる</div>
-    </div>
-    <div class="problem-card">
-      <div class="problem-card-num">🤫</div>
-      <div class="problem-card-text">人がいない。音がない。スマホの通知も、誰かの視線も、ここには届かない</div>
+<!-- SCIENCE -->
+<section class="section-dark" style="background:#e8e2d0; color:#1e2e24;">
+  <div class="section-dark-inner">
+    <span class="label">科学的根拠</span>
+    <h2 class="big big-light">楽しみを<em>期待するだけ</em>で、<br>人の脳は変わる。</h2>
+    <div class="dark-cards">
+      <div class="dark-card">
+        <div class="dark-card-title">楽しみにしている状態そのものがウェルビーイングを高める</div>
+        <div class="dark-card-body">fMRI研究で、未来のポジティブな出来事を期待するだけで脳のウェルビーイング回路が活性化することが証明されている。</div>
+        <div class="dark-card-source">Luo et al., Frontiers in Psychology（2018）</div>
+      </div>
+      <div class="dark-card">
+        <div class="dark-card-title">外部からの希望サポートが、内発的な希望を育てる</div>
+        <div class="dark-card-body">縦断研究で、外部エージェントからの希望サポートが本人の内発的な希望を高め、人生満足度を上げることが証明されている。</div>
+        <div class="dark-card-source">Coban-Tosyali & Bozo, Journal of Happiness Studies（2026）</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SEASON -->
-<section class="season">
-  <div class="season-inner">
-    <span class="season-label">釧路でしか作れない体験</span>
-    <h2 class="season-title">季節ごとに、違う深呼吸がある。</h2>
-    <div class="season-cards">
-      <div class="season-card">
-        <img class="season-card-img" src="./27763013_m.jpg" alt="夏の湿原">
-        <div class="season-card-body-wrap">
-          <div class="season-card-season">Summer — 夏</div>
-          <div class="season-card-title">霧と静寂の湿原</div>
-          <div class="season-card-body">夏でも涼しく、人がいない。整備されていない本物の荒野。東京では絶対に作れない「なーんにも考えなくていい時間」が生まれる。</div>
-        </div>
-      </div>
-      <div class="season-card">
-        <img class="season-card-img" src="./snow.jpg" alt="冬の朝">
-        <div class="season-card-body-wrap">
-          <div class="season-card-season">Winter — 冬</div>
-          <div class="season-card-title">ダイヤモンドダストの朝</div>
-          <div class="season-card-body">マイナス10度の朝、自分の息がキラキラと輝く。生まれて初めて見る景色が、五感を覚醒させる。（冬プログラム：2027年開始予定）</div>
-        </div>
-      </div>
+<!-- WHO5 -->
+<section class="section" style="background:#ede8d8;">
+  <span class="label">効果測定</span>
+  <h2 class="big">変化を、<em>数値で</em>記録する。</h2>
+  
+  <p class="body">WHO（世界保健機関）が開発したウェルビーイング尺度「WHO-5」で、あなたの変化を月次で記録します。</p>
+  <div class="who5-items">
+    <div class="who5-item">
+      <div class="who5-num">①</div>
+      <div class="who5-text">気分が良く、元気だった</div>
     </div>
+    <div class="who5-item">
+      <div class="who5-num">②</div>
+      <div class="who5-text">落ち着いていて、リラックスしていた</div>
+    </div>
+    <div class="who5-item">
+      <div class="who5-num">③</div>
+      <div class="who5-text">活力があり、活発だった</div>
+    </div>
+    <div class="who5-item">
+      <div class="who5-num">④</div>
+      <div class="who5-text">朝、すっきりと目が覚めた</div>
+    </div>
+    <div class="who5-item">
+      <div class="who5-num">⑤</div>
+      <div class="who5-text-hl">日常生活が興味深いことで満たされていた — ASTOmeが解く問題</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMISE -->
+<section class="promise" style="background:#C6D3C3;">
+  <div class="promise-inner">
+    <h2 class="promise-title">
+      明日は、毎日来る。<br>
+      だから卒業のない<br>サービスになれる。
+    </h2>
+    <p class="promise-body">
+      楽しみを見つけることに、終わりはない。<br>
+      人生のずっと隣にいるサービスを目指しています。
+    </p>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section" id="cta">
-  <div class="cta-bg"></div>
-  <div class="cta-content">
-    <h2 class="cta-title">
-      <strong>また明日から頑張ってみよう</strong>と、<br>
-      思える自分になりに来てください。
-    </h2>
-    <p class="cta-sub">
-      2026年夏 — 釧路 — 1泊2日 — 定員5名<br>
-      先行モニター募集中（無料相談から）
-    </p>
-    <a href="mailto:info@astome.jp" class="cta-btn">
-      先行案内を受け取る →
-    </a>
+<section class="cta" id="cta">
+  <div class="cta-inner">
+    <h2 class="cta-title">次の楽しみを、<br>一緒に見つけませんか。</h2>
+    <p class="cta-sub">現在、先行登録を受け付けています。<br>リリース時に最初にご案内します。</p>
+    <a href="https://line.me/R/ti/p/@astome" class="cta-btn">LINEで先行登録する →</a>
+    <p class="cta-note">無料 · いつでも解除できます</p>
   </div>
 </section>
 
-<!-- MESSAGE -->
-<section style="padding: 100px 48px; text-align: center; border-top: 1px solid rgba(141,184,154,0.1);">
-  <p style="font-family:'Noto Sans JP',sans-serif; font-weight:200; font-size:clamp(16px,2.5vw,22px); line-height:2.2; color:rgba(240,245,241,0.7); max-width:600px; margin:0 auto;">
-    ASTOmeの最初のプログラムは、釧路です。<br>
-    でも私たちが届けたいのは、釧路ではありません。<br><br>
-    <span style="color:#f0f5f1; font-weight:300;">「また明日から頑張ろうと思える時間」を、</span><br>
-    <span style="color:#f0f5f1; font-weight:300;">あなたの近くに作ることです。</span>
-  </p>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">ASTO<span>me</span> — アストミー</div>
+  <div class="footer-logo" style="display:flex; align-items:center; gap:8px;">
+  <svg width="24" height="24" viewBox="0 0 120 120" fill="none">
+    <rect width="120" height="120" rx="26" fill="url(#ft-bg)"/>
+    <defs>
+      <linearGradient id="ft-bg" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#C6D3C3"/>
+        <stop offset="100%" stop-color="#b8c8b4"/>
+      </linearGradient>
+      <linearGradient id="ft-a" x1="30" y1="15" x2="90" y2="100" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#6a8e7a"/>
+        <stop offset="100%" stop-color="#8ab0a0"/>
+      </linearGradient>
+      <radialGradient id="ft-sun" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#F8DFA3"/>
+        <stop offset="100%" stop-color="#F3C25B"/>
+      </radialGradient>
+    </defs>
+    <path d="M60 18 L98 88 Q98 95 90 95 L30 95 Q22 95 22 88 Z" fill="none" stroke="url(#ft-a)" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M30 82 Q50 70 60 76 Q70 82 90 74" stroke="rgba(245,240,220,0.9)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="60" cy="74" r="10" fill="url(#ft-sun)"/>
+  </svg>
+  <span>ASTOme</span>
+</div>
   <div class="footer-copy">明日の自分へ</div>
 </footer>
 
