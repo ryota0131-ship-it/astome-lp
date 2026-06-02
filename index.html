@@ -121,6 +121,10 @@
     animation: up 0.8s ease forwards 0.6s;
   }
 
+  @media (max-width: 768px) {
+    .hero-body { max-width: 100%; font-size: 15px; }
+  }
+
   .hero-cta {
     display: inline-flex;
     align-items: center;
@@ -411,15 +415,38 @@
   }
 
   /* MOBILE */
-  @media (max-width: 680px) {
+  @media (max-width: 768px) {
     nav { padding: 16px 20px; }
-    .hero { padding: 100px 24px 60px; }
-    .section { padding: 72px 24px; }
-    .section-dark { padding: 72px 24px; }
-    .cards { grid-template-columns: 1fr; }
-    .dark-cards { grid-template-columns: 1fr; }
-    .promise { padding: 80px 20px; }
-    .cta { padding: 80px 20px; }
+    .logo span { font-size: 16px; }
+    .hero { padding: 100px 24px 60px; max-width: 100%; }
+    .hero-title { font-size: 36px; font-weight: 300; }
+    .hero-body { font-size: 15px; }
+    .section { padding: 64px 24px; max-width: 100%; }
+    .section-dark { padding: 64px 0; }
+    .section-dark-inner { padding: 0 24px !important; }
+    .big { font-size: 28px; }
+    .body { font-size: 14px; }
+    .cards { grid-template-columns: 1fr; gap: 2px; }
+    .dark-cards { grid-template-columns: 1fr; gap: 2px; }
+    .steps { gap: 0; }
+    .step { padding: 24px 0; gap: 16px; }
+    .step-num { font-size: 36px; min-width: 36px; }
+    .step-title { font-size: 15px; }
+    .step-body { font-size: 13px; }
+    .dark-card { padding: 24px 20px; }
+    .dark-card-title { font-size: 14px; }
+    .dark-card-body { font-size: 13px; }
+    .who5-items { gap: 2px; }
+    .who5-item { padding: 16px 16px; }
+    .who5-text { font-size: 13px; }
+    .who5-text-hl { font-size: 13px; }
+    .promise { padding: 72px 24px; }
+    .promise-title { font-size: 28px; }
+    .promise-body { font-size: 14px; }
+    .cta { padding: 72px 24px; }
+    .cta-title { font-size: 28px; }
+    .cta-sub { font-size: 13px; }
+    .cta-btn { padding: 14px 32px; font-size: 13px; }
     footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
   }
 </style>
@@ -428,7 +455,32 @@
 
 <nav>
   <div class="logo" style="display:flex; align-items:center; gap:10px;">
-<img src="./ASTOme.rogo.png" width="32" height="32" style="border-radius:8px;">
+  <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
+    <rect width="120" height="120" rx="26" fill="url(#nav-bg)"/>
+    <defs>
+      <radialGradient id="nav-glow" cx="60%" cy="70%" r="50%">
+        <stop offset="0%" stop-color="#f5f0dc" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="transparent"/>
+      </radialGradient>
+      <linearGradient id="nav-bg" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#C6D3C3"/>
+        <stop offset="100%" stop-color="#b8c8b4"/>
+      </linearGradient>
+      <linearGradient id="nav-a" x1="30" y1="15" x2="90" y2="100" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#6a8e7a"/>
+        <stop offset="100%" stop-color="#8ab0a0"/>
+      </linearGradient>
+      <radialGradient id="nav-sun" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#F8DFA3"/>
+        <stop offset="100%" stop-color="#F3C25B"/>
+      </radialGradient>
+    </defs>
+    <rect width="120" height="120" rx="26" fill="url(#nav-glow)"/>
+    <path d="M60 18 L98 88 Q98 95 90 95 L30 95 Q22 95 22 88 Z" fill="none" stroke="url(#nav-a)" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M30 82 Q50 70 60 76 Q70 82 90 74" stroke="rgba(245,240,220,0.9)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="60" cy="74" r="10" fill="url(#nav-sun)"/>
+    <ellipse cx="60" cy="76" rx="18" ry="5" fill="rgba(255,200,80,0.15)"/>
+  </svg>
   <span>ASTOme</span>
 </div>
   <a href="#cta" class="nav-btn">先行登録</a>
